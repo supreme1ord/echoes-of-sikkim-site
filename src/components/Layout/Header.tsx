@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, Home, ArrowLeft } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { AuthModal } from "@/components/Auth/AuthModal";
@@ -27,15 +27,34 @@ export const Header = () => {
     <>
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          {/* Left Side - Back to Home + Logo */}
+          <div className="flex items-center space-x-4">
+            {/* Back to Home Button */}
+            {location.pathname !== "/" && (
+              <Button
+                asChild
+                variant="ghost"
+                size="sm"
+                className="text-muted-foreground hover:text-primary"
+              >
+                <Link to="/" className="flex items-center space-x-2">
+                  <ArrowLeft className="h-4 w-4" />
+                  <Home className="h-4 w-4" />
+                  <span className="hidden sm:inline">Home</span>
+                </Link>
+              </Button>
+            )}
+            
+            {/* Logo */}
+            <Link to="/" className="flex items-center space-x-2">
             <div className="w-10 h-10 bg-gradient-hero rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-xl">E</span>
             </div>
-            <span className="font-serif text-xl font-semibold text-foreground">
-              EchoesOfSikkim
-            </span>
-          </Link>
+              <span className="font-serif text-xl font-semibold text-foreground">
+                EchoesOfSikkim
+              </span>
+            </Link>
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
